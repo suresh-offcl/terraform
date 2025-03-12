@@ -1,46 +1,52 @@
-variable "instacnes_names" {
-    type = list(string)
-    default = ["mysql","backend","frontend"]
+variable "common_tags" {
+  type        = map 
+  default = {
+    Project = "expense"
+    Environment = "dev"
+    Terraform = true
+  }
+  
 }
 
 variable "instance_type" {
-    type = string
-    default = "t3.micro"
-
+  default="mysql"
 }
 
-variable "common_tags" {
+variable "domain_name" {
+  default = "khanishkcosmetics.store"
+}
 
-    type = map 
-    default = {
-        Project = "expense"
-        Environment = "dev"
-        Terraform =  "true"
-    }
-    
+variable "zone_id" {
+  default = "Z06545581RGF8GAQCIKZF"
+}
+
+variable "instances_names" {
+    type = list(string)
+
+    default = ["mysql","backend","frontend"]
+
 }
 
 variable "from_port" {
-    type = string
-    default = "0"
+      default = "0"
 }
 
 variable "to_port" {
-    type = string
     default = "0"
 }
 
 variable "protocol" {
-    type = string
-    default = "tcp"
+  default = "tcp"
 }
 
-variable "ingress_cidr" {
-    type = list(string)
+variable "ingress_cidr_block" {
+
     default = ["0.0.0.0/0"]
+
 }
 
-variable "egress_cidr" {
-    type = list(string)
+variable "egress_cidr_block" {
+
     default = ["0.0.0.0/0"]
+
 }
