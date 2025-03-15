@@ -1,13 +1,14 @@
 resource "aws_instance" "terraform_expense" {
-  count = length(var.instances_names)
+  for_each = var.instances
+  
   ami           = data.aws_ami.datasourcess.id # Amazon Linux 2 AMI (change based on region)
-  instance_type = var.instances_names[count.index] == "mysql" ? "t3.small": "t3.micro"
+  instance_type = each.value
   vpc_security_group_ids  = [aws_security_group.allow_ssh.id]
 
   tags = merge(
     var.common_tags,
     {
-     Name =  var.instances_names[count.index]
+     Name =  each.key
     }
   )
 }

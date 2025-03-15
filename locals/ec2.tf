@@ -16,18 +16,18 @@ resource "aws_security_group" "allow_ssh" {
   name        = "allow_ssh"
 
   ingress {
-    from_port   = var.from_port
-    to_port     = var.to_port
-    protocol    = var.protocol
-    cidr_blocks = var.ingress_cidr_block  # Open to all (not recommended for production)
+    from_port   = local.from_port
+    to_port     = local.to_port
+    protocol    = local.protocol
+    cidr_blocks = local.ingress_cidr_block  # Open to all (not recommended for production)
   }
 
  
   egress {
-    from_port   = var.from_port
-    to_port     = var.to_port
+    from_port   = local.from_port
+    to_port     = local.to_port
     protocol    = "-1"
-    cidr_blocks = var.egress_cidr_block
+    cidr_blocks = local.egress_cidr_block
   }
 
   tags = merge(
